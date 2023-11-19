@@ -10,6 +10,7 @@ import AddRecipe from './pages/AddRecipe'
 import ListRecipes from './pages/ListRecipes'
 import RecipeDetail from './pages/DetailRecipe'
 import UpdateRecipe from './pages/UpdateRecipe'
+import About from './pages/AboutPage'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 <Routes>
 
     <Route path='/'element={<Home/>}/>
+    <Route path='/about'element={<About/>}/>
     <Route path='/signup'element={<Signup/>}/>
     <Route path='/login'element={<Login/>}/>
     <Route path='/profile'element={<UpdateProfile/>}/>

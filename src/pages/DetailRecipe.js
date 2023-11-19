@@ -32,6 +32,12 @@ const RecipeDetail = () => {
    
     navigate(`/update-recipe/${recipeId}`);
   };
+  const handleShare = () => {
+    const recipeLink = `${window.location.origin}/recipe/${recipeId}`;
+    navigator.clipboard.writeText(recipeLink)
+      .then(() => alert('Link copied to clipboard'))
+      .catch((error) => console.error('Error copying to clipboard:', error));
+  };
 
   useEffect(() => {
     const fetchRecipeDetails = async () => {
@@ -66,6 +72,12 @@ const RecipeDetail = () => {
         <div className="p-6 rounded-md shadow-md mt-10 relative text-gray-800">
           {user._id === recipe.createdBy && (
             <div className="flex justify-end mb-2">
+                 <button
+                className="p-3 bg-green-500 text-white rounded-md mr-2"
+                onClick={handleShare}
+              >
+                <i className="fas fa-share"></i> Share
+              </button>
               <button
                 className="p-2 bg-green-500 text-white rounded-md mr-2"
                 onClick={handleUpdate}
