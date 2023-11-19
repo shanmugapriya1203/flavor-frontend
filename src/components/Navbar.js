@@ -16,12 +16,11 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/auth/logout`, {
+      await axios.post(`${API_BASE_URL}/api/auth/logout`, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      const data = await res.data;
       localStorage.removeItem('user-flavor');
       localStorage.removeItem('token');
       setUser(null);
@@ -63,37 +62,42 @@ const Navbar = () => {
             </li>
 
             {currentUser ? (
-              <li className="dropdown">
-                <div className="relative inline-block text-left">
-                  <button
-                    className="rounded-full h-7 w-7 object-cover focus:outline-none"
-                    onClick={() => setOpen(!open)}
-                  >
-                    <img src={avatar} alt="profile" className="rounded-full h-7 w-7 object-cover" />
-                  </button>
-                  {open && (
-                    <div className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <div className="py-1">
-                        <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                          My Profile
-                        </Link>
-                        <Link to="/my-recipes" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                          My Recipes
-                        </Link>
-                        <button
-                          onClick={handleLogout}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                        >
-                          Logout
-                        </button>
+              <>
+                <li>
+                  <Link to="/add-recipe">Add Recipe</Link>
+                </li>
+                <li className="dropdown">
+                  <div className="relative inline-block text-left">
+                    <button
+                      className="rounded-full h-7 w-7 object-cover focus:outline-none"
+                      onClick={() => setOpen(!open)}
+                    >
+                      <img src={avatar} alt="profile" className="rounded-full h-7 w-7 object-cover" />
+                    </button>
+                    {open && (
+                      <div className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div className="py-1">
+                          <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            My Profile
+                          </Link>
+                          <Link to="/my-recipes" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            My Recipes
+                          </Link>
+                          <button
+                            onClick={handleLogout}
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                          >
+                            Logout
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-              </li>
+                    )}
+                  </div>
+                </li>
+              </>
             ) : (
               <li>
-                <Link to="/signup">Register</Link>
+                <Link to="/login">Login</Link>
               </li>
             )}
           </ul>
