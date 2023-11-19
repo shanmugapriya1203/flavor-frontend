@@ -136,14 +136,14 @@ const AddRecipe = () => {
 
   return (
     <main className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center mb-6 text-black-500 mt-8">Add a New Recipe</h1>
-      <form className="grid grid-cols-1 sm:grid-cols-2 gap-4" onSubmit={handleSubmit}>
+      <h1 className="text-4xl font-bold text-center mb-2 text-black-500 mt-12">Add a New Recipe</h1>
+      <form className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5" onSubmit={handleSubmit}>
       {error && (
           <div className="bg-red-500 text-white p-3 mb-4 rounded-md">
             {error}
           </div>
         )}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           <input
             type="text"
             placeholder="Recipe Name"
@@ -190,7 +190,11 @@ const AddRecipe = () => {
             <option value="Indian">Indian</option>
           </select>
         </div>
-             <input
+            
+        </div>
+        {/* Image Upload */}
+        <div className="flex flex-col gap-4">
+        <input
             type="number"
             placeholder="Preparation Time"
             id="preparationTime"
@@ -198,9 +202,6 @@ const AddRecipe = () => {
             onChange={handleChange}
             value={formData.preparationTime}
           />
-        </div>
-        {/* Image Upload */}
-        <div className="flex flex-col gap-4">
           <p className="font-semibold">
             Images: <span className="font-normal text-gray-600 ml-2">The first image will be the cover (max 6)</span>
           </p>

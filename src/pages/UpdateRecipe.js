@@ -232,7 +232,11 @@ const UpdateRecipe = () => {
   </select>
 </div>
 
-             <input
+            
+        </div>
+        {/* Image Upload */}
+        <div className="flex flex-col gap-3">
+        <input
             type="number"
             placeholder="Preparation Time"
             id="preparationTime"
@@ -240,9 +244,6 @@ const UpdateRecipe = () => {
             onChange={handleChange}
             value={formData.preparationTime}
           />
-        </div>
-        {/* Image Upload */}
-        <div className="flex flex-col gap-4">
           <p className="font-semibold">
             Images: <span className="font-normal text-gray-600 ml-2">The first image will be the cover (max 6)</span>
           </p>
