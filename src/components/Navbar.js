@@ -14,7 +14,7 @@ const Navbar = () => {
   const currentUser = useRecoilValue(userAtom);
   const setUser = useResetRecoilState(userAtom);
   const navigate = useNavigate();
-
+  
   const handleLogout = async () => {
     try {
       await axios.post(`${API_BASE_URL}/api/auth/logout`, {

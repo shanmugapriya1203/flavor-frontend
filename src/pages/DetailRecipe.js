@@ -109,6 +109,10 @@ const RecipeDetail = () => {
             <h2 className="text-xl font-bold mb-2 text-green-800 ml-20">Preparation Time</h2>
             <p className="text-gray-700 ml-20">{recipe.preparationTime} min</p>
           </div>
+          <div>
+            <h2 className="text-xl font-bold mb-2 text-green-800 ml-20">Cuisnine</h2>
+            <p className="text-gray-700  ml-20">{recipe.cuisine} </p>
+          </div>
         </div>
       )}
     </div>

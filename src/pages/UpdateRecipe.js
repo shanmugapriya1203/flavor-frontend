@@ -17,6 +17,7 @@ const UpdateRecipe = () => {
     ingredients: [],
     instructions: [],
     preparationTime: '', 
+    cuisine: ''
   });
   const navigate = useNavigate();
   const [user,setUser]=useRecoilState(userAtom)
@@ -164,6 +165,7 @@ const UpdateRecipe = () => {
         ingredients: [],
         instructions: [],
         preparationTime: '',
+        cuisine: ''
       });
   
       navigate('/my-recipes');
@@ -213,6 +215,23 @@ const UpdateRecipe = () => {
             onChange={handleChange}
             value={formData.instructions}
           />
+          <div className="flex flex-col gap-4">
+  <select
+    id="cuisine"
+    className="border p-3 rounded-md"
+    onChange={handleChange}
+    value={formData.cuisine}
+  >
+    <option value="" disabled>
+      Select Cuisine
+    </option>
+    <option value="Italian">Italian</option>
+    <option value="Japanese">Japanese</option>
+    <option value="Mexican">Mexican</option>
+    <option value="Indian">Indian</option>
+  </select>
+</div>
+
              <input
             type="number"
             placeholder="Preparation Time"

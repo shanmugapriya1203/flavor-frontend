@@ -16,6 +16,7 @@ const AddRecipe = () => {
     ingredients: [],
     instructions: '',
     preparationTime: '', 
+    cuisine: '',
   });
   const navigate = useNavigate();
   const [user,setUser]=useRecoilState(userAtom)
@@ -94,9 +95,10 @@ const AddRecipe = () => {
     }
   };
 
-  
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     const token = localStorage.getItem("token");
     try {
       const headers = {
@@ -112,7 +114,7 @@ const AddRecipe = () => {
       }
       );
       const data = res.data;
-
+      
       if (data.error) {
         setError(data.error);
         return;
@@ -171,6 +173,23 @@ const AddRecipe = () => {
             onChange={handleChange}
             value={formData.instructions}
           />
+            <div className="flex flex-col gap-4">
+       
+          <select
+            id="cuisine"
+            className="border p-3 rounded-md"
+            onChange={handleChange}
+            value={formData.cuisine}
+          >
+            <option value="" disabled>
+              Select Cuisine
+            </option>
+            <option value="Italian">Italian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Indian">Indian</option>
+          </select>
+        </div>
              <input
             type="number"
             placeholder="Preparation Time"
