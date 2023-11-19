@@ -1,26 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
  import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../firebase';
 import { API_BASE_URL } from '../config';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import userAtom from '../atoms/userAtom';
 import axios from 'axios';
 
-const AddRecipe = () => {
+const UpdateRecipe = () => {
+    const { recipeId } = useParams();
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     images: [],
     name: '',
     description: '',
     ingredients: [],
-    instructions: '',
+    instructions: [],
     preparationTime: '', 
   });
   const navigate = useNavigate();
   const [user,setUser]=useRecoilState(userAtom)
   const [error, setError] = useState(null);
+  const [recipe, setRecipe] = useState({});
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchRecipeDetails = async () => {
+      const token = localStorage.getItem("token");
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+        };
+        if (token) {
+          headers.Authorization = token;
+        }
+        setLoading(true);
+        const response = await axios.get(`${API_BASE_URL}/api/recipe/detail/${recipeId}`, {
+          headers
+        });
+        setRecipe(response.data);
+        setFormData({
+            images: response.data.images,
+            name: response.data.name,
+            description: response.data.description,
+            ingredients: response.data.ingredients,
+            instructions: response.data.instructions,
+            preparationTime: response.data.preparationTime,
+          });
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching recipe details:', error);
+        setLoading(false);
+      }
+    };
 
+    fetchRecipeDetails();
+  }, [recipeId]);
   const handleImageSubmit = async () => {
     if (files.length > 0 && files.length + formData.images.length < 3) {
       const promises = [];
@@ -98,43 +132,51 @@ const AddRecipe = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
+  
     try {
       const headers = {
         "Content-Type": "application/json",
       };
+  
       if (token) {
         headers.Authorization = token;
       }
-      const res= await axios.post(`${API_BASE_URL}/api/recipe/create/${user._id}`,
-      formData,
-      {
-        headers
-      }
+  
+      const updatedRecipe = await axios.put(
+        `${API_BASE_URL}/api/recipe/update/${recipeId}`,
+        formData,
+        {
+          headers,
+        }
       );
-      const data = res.data;
-
+  
+      const data = updatedRecipe.data;
+  
       if (data.error) {
         setError(data.error);
         return;
       }
+  
       setFormData({
         images: [],
         name: '',
         description: '',
         ingredients: [],
-        instructions: '',
-        preparationTime:'',
+        instructions: [],
+        preparationTime: '',
       });
-      navigate('/my-recipes')
+  
+      navigate('/my-recipes');
     } catch (error) {
-      console.error('Error adding recipe:', error);
-    setError('An error occurred while adding the recipe.');
+      console.error('Error updating recipe:', error);
+      setError('An error occurred while updating the recipe.');
     }
   };
+  
 
   return (
     <main className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center mb-6 text-black-500 mt-8">Add a New Recipe</h1>
+      <h1 className="text-4xl text-center mb-6 text-black-500 mt-8">Update Recipe</h1>
       <form className="grid grid-cols-1 sm:grid-cols-2 gap-4" onSubmit={handleSubmit}>
       {error && (
           <div className="bg-red-500 text-white p-3 mb-4 rounded-md">
@@ -227,4 +269,4 @@ const AddRecipe = () => {
   );
 };
 
-export default AddRecipe;
+export default UpdateRecipe;

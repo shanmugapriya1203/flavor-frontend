@@ -43,7 +43,7 @@ const ListRecipes = ({ userId }) => {
 
   return (
     <div className="container mx-auto p-4 ">
-      <h1 className="text-4xl font-bold text-center mb-6 text-green-500 mt-10">User Recipes</h1>
+      <h1 className="text-4xl font-bold text-center mb-6 text-green-500 mt-10">My Recipes</h1>
       {loading && <p>Loading...</p>}
       {!loading && recipes.length === 0 && <p>No recipes found for this user.</p>}
       {!loading && recipes.length > 0 && (
@@ -61,8 +61,8 @@ const RecipeCard = ({ recipe, onReadMore }) => {
   const imageUrl = (recipe.images && recipe.images.length > 0) ? recipe.images[0] : "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600";
 
   return (
-    <div className="bg-white p-6 rounded-md shadow-md m-4 text-center">
-      <div className="mb-4">
+    <div className="bg-white p-6 rounded-md shadow-md text-center mb-6"> {/* Add margin-bottom here */}
+      <div className="mb-4 ">
         <img
           src={imageUrl}
           alt={recipe.name}
@@ -75,5 +75,6 @@ const RecipeCard = ({ recipe, onReadMore }) => {
     </div>
   );
 };
+
 
 export default ListRecipes;

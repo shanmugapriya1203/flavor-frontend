@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { HiMenuAlt3 } from 'react-icons/hi';
 import { AiOutlineClose } from 'react-icons/ai';
+import Logo from '../images/logoNav.png'
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import userAtom from '../atoms/userAtom';
 import avatar from '../images/avatar.png';
@@ -49,6 +50,7 @@ const Navbar = () => {
       <header className={`w-full fixed z-10 bg-white transition-all duration-300 ease-in-out`}>
         <nav className="flex w-full py-2 md:py-3 px-4 md:px-20 items-center justify-between">
           <Link to="/" className="flex items-center justify-center text-black text-lg cursor-pointer">
+          <img src={Logo} alt="Logo" className={`w-5 h-5 lg:w-10 lg:h-10 ${open ? 'block' : 'hidden'} md:block`} />
             Flavor<span className='text-green-700'>Fusion </span>
           </Link>
 
