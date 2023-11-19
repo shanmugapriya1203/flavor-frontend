@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Footer from './components/Footer'
 import UpdateProfile from './pages/UpdateProfile'
 import Signup from './pages/SignUp';
+import AddRecipe from './pages/AddRecipe'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
     <Route path='/signup'element={<Signup/>}/>
     <Route path='/login'element={<Login/>}/>
     <Route path='/profile'element={<UpdateProfile/>}/>
+    <Route path='/add-recipe'element={<AddRecipe/>}/>
   
 </Routes>
 <Footer/>
