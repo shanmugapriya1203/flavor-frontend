@@ -86,7 +86,12 @@ const Navbar = () => {
                           <Link to="/my-recipes" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                             My Recipes
                           </Link>
+                          <Link to="/liked" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            Liked Recipes
+                          </Link>
                           <button
+
+
                             onClick={handleLogout}
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
                           >

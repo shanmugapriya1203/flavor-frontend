@@ -11,11 +11,15 @@ import ListRecipes from './pages/ListRecipes'
 import RecipeDetail from './pages/DetailRecipe'
 import UpdateRecipe from './pages/UpdateRecipe'
 import About from './pages/AboutPage'
+import ListLikedRecipes from './pages/Liked Recipes'
+import { useRecoilState } from 'recoil'
+import userAtom from './atoms/userAtom'
 
 
 function App() {
 
-
+  const [user, setUser] = useRecoilState(userAtom);
+  const userId = user ? user._id : null;
   return (
 <BrowserRouter>
 <Navbar/>
@@ -28,6 +32,7 @@ function App() {
     <Route path='/profile'element={<UpdateProfile/>}/>
     <Route path='/add-recipe'element={<AddRecipe/>}/>
     <Route path='/my-recipes'element={<ListRecipes/>}/>
+    <Route path='/liked' element={<ListLikedRecipes userId={userId} />} />
     <Route path="/recipe/:recipeId"  element={<RecipeDetail/>}/>
     <Route path="/update-recipe/:recipeId"  element={<UpdateRecipe/>}/>
   

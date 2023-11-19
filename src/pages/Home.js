@@ -15,15 +15,37 @@ const Home = () => {
     navigate(`/recipe/${recipeId}`);
   };
 
-  const handleLikeAndUnlike = (recipeId) => {
-    // Toggle the liked state for the recipe
-    setLikedRecipes((prevLikedRecipes) => {
-      if (prevLikedRecipes.includes(recipeId)) {
-        return prevLikedRecipes.filter((id) => id !== recipeId);
+  const handleLikeAndUnlike = async (recipeId) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/recipe/like/${recipeId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
+      });
+
+      if (response.ok) {
+      
+          setLikedRecipes((prevLikedRecipes) => {
+          if (prevLikedRecipes.includes(recipeId)) {
+            return prevLikedRecipes.filter((id) => id !== recipeId);
+          } else {
+            return [...prevLikedRecipes, recipeId];
+          }
+        });
       } else {
-        return [...prevLikedRecipes, recipeId];
+        console.error('Failed to like/unlike recipe:', response.status, response.statusText);
       }
-    });
+    } catch (error) {
+      console.error('Error liking/unliking recipe:', error);
+    }
   };
 
   useEffect(() => {
