@@ -59,51 +59,55 @@ const RecipeDetail = () => {
   }, [recipeId]);
 
   return (
-    <div className="container mx-auto p-4">
+<div className="container mx-auto p-4">
       {loading && <p>Loading...</p>}
       {!loading && !recipe.name && <p>No recipe found with the given ID.</p>}
       {!loading && recipe.name && (
-        <div className="p-6 rounded-md shadow-md mt-10 relative">
- <div className="flex justify-end">
-            {user._id === recipe.createdBy && (
-              <>
-                <button
-                  className="p-2 bg-green-500 text-white rounded-md mr-2"
-                  onClick={handleUpdate}
-                >
-                  Update
-                </button>
-                <button
-                  onClick={handleDelete}
-                  className="p-2 bg-red-500 text-white rounded-md mr-2"
-                >
-                  Delete
-                </button>
-              </>
-            )}
+        <div className="p-6 rounded-md shadow-md mt-10 relative text-gray-800">
+          {user._id === recipe.createdBy && (
+            <div className="flex justify-end mb-2">
+              <button
+                className="p-2 bg-green-500 text-white rounded-md mr-2"
+                onClick={handleUpdate}
+              >
+                Update
+              </button>
+              <button
+                onClick={handleDelete}
+                className="p-2 bg-red-500 text-white rounded-md"
+              >
+                Delete
+              </button>
+            </div>
+          )}
+
+          <h1 className="text-4xl font-bold mb-4 text-green-800 text-center">{recipe.name}</h1>
+          <div className="flex justify-center mb-4">
+            <img
+              src={recipe.images[0]}
+              alt={recipe.name}
+              className="w-40 h-40 object-cover rounded-md"
+            />
+          </div>
+          <p className="text-gray-700 mb-4 font-bold text-xl text-center">{recipe.description}</p>
+
+          <div>
+            <h2 className="text-xl font-bold mb-2 text-green-800 ml-20">Ingredients</h2>
+            <ul className="list-disc ml-20">
+              {recipe.ingredients && recipe.ingredients.map((ingredient, index) => (
+                <li key={index} className="text-gray-700">{ingredient}</li>
+              ))}
+            </ul>
           </div>
 
-          <h1 className="text-4xl font-bold mb-4 text-green-500">{recipe.name}</h1>
-          <img
-            src={recipe.images[0]}
-            alt={recipe.name}
-            className="w-40 h-40 object-cover rounded-md mb-4"
-          />
-          <p className="text-gray-700 mb-4 font-bold text-xl">{recipe.description}</p>
+          <div>
+            <h2 className="text-xl font-bold mb-2 text-green-800 ml-20">Instructions</h2>
+            <p className="text-gray-700 ml-20">{recipe.instructions}</p>
+          </div>
 
-          <div className="flex">
-            <div className="mr-8">
-              <h2 className="text-xl font-bold mb-2 text-gray-800">Ingredients</h2>
-              <ul className="list-disc ml-5">
-                {recipe.ingredients && recipe.ingredients.map((ingredient, index) => (
-                  <li key={index} className="text-gray-700">{ingredient}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h2 className="text-xl font-bold mb-2 text-gray-800">Instructions</h2>
-              <p className="text-gray-700">{recipe.instructions}</p>
-            </div>
+          <div>
+            <h2 className="text-xl font-bold mb-2 text-green-800 ml-20">Preparation Time</h2>
+            <p className="text-gray-700 ml-20">{recipe.preparationTime} min</p>
           </div>
         </div>
       )}
