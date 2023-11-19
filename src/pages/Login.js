@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
 import { useSetRecoilState } from "recoil";
@@ -45,6 +45,7 @@ const Login = () => {
               setLoading(false)
             
               navigate('/')
+              window.location.reload();
               
            } catch (error) {
             setLoading(false);
