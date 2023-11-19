@@ -1,11 +1,19 @@
-import React from 'react'
+import React from 'react';
+import Banner from '../components/Banner';
+
+
 
 const Home = () => {
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <main className='w-full flex flex-col'>
+      <Banner
+        title="Embark on a Global Flavor Journey with FlavorFusion"
+        type="home"
+      />
 
-export default Home
+  
+    </main>
+  );
+};
+
+export default Home;
