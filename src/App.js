@@ -7,6 +7,8 @@ import Footer from './components/Footer'
 import UpdateProfile from './pages/UpdateProfile'
 import Signup from './pages/SignUp';
 import AddRecipe from './pages/AddRecipe'
+import ListRecipes from './pages/ListRecipes'
+import RecipeDetail from './pages/DetailRecipe'
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
     <Route path='/login'element={<Login/>}/>
     <Route path='/profile'element={<UpdateProfile/>}/>
     <Route path='/add-recipe'element={<AddRecipe/>}/>
+    <Route path='/my-recipes'element={<ListRecipes/>}/>
+    <Route path="/recipe/:recipeId"  element={<RecipeDetail/>}/>
   
 </Routes>
 <Footer/>

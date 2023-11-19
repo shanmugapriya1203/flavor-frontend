@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
  import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../firebase';
-// import { useSelector } from 'react-redux';
 import { API_BASE_URL } from '../config';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -16,6 +15,7 @@ const AddRecipe = () => {
     description: '',
     ingredients: [],
     instructions: '',
+    preparationTime: '', 
   });
   const navigate = useNavigate();
   const [user,setUser]=useRecoilState(userAtom)
@@ -123,7 +123,9 @@ const AddRecipe = () => {
         description: '',
         ingredients: [],
         instructions: '',
+        preparationTime:'',
       });
+      navigate('/my-recipes')
     } catch (error) {
       console.error('Error adding recipe:', error);
     setError('An error occurred while adding the recipe.');
@@ -132,7 +134,7 @@ const AddRecipe = () => {
 
   return (
     <main className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center mb-6 text-gray-500">Add a New Recipe</h1>
+      <h1 className="text-4xl text-center mb-6 text-black-500 mt-8">Add a New Recipe</h1>
       <form className="grid grid-cols-1 sm:grid-cols-2 gap-4" onSubmit={handleSubmit}>
       {error && (
           <div className="bg-red-500 text-white p-3 mb-4 rounded-md">
@@ -168,6 +170,14 @@ const AddRecipe = () => {
             className="border p-3 rounded-md"
             onChange={handleChange}
             value={formData.instructions}
+          />
+             <input
+            type="number"
+            placeholder="Preparation Time"
+            id="preparationTime"
+            className="border p-3 rounded-md"
+            onChange={handleChange}
+            value={formData.preparationTime}
           />
         </div>
         {/* Image Upload */}
