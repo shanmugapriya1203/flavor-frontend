@@ -1,2 +1,2 @@
-const API_BASE_URL = 'https://dev-fi3b.onrender.com'
+const API_BASE_URL = 'https://flavor-fusion-zmod.onrender.com'
 export { API_BASE_URL}
