@@ -22,37 +22,52 @@ const Login = () => {
           [e.target.id]: e.target.value,
         });
       };
-      const handleSubmit=async(e)=>{
-        e.preventDefault();
-        setLoading(true)
-           try {
-            const res= await axios.post(`${API_BASE_URL}/api/auth/login`,formData,{
-                headers:{
-                    'Content-Type':'application/json'
-                }
-            
-            })
-            const data= res.data
-            if(data.success=== false){
-                setLoading(false)
-                setError(data.message)
-                return;
-              }
-              setUser(data.user);
-              const token=data.token;
-              localStorage.setItem('token',token)
-              localStorage.setItem("user-flavor",JSON.stringify(data))
-              setLoading(false)
-            
-              navigate('/')
-              window.location.reload();
-              
-           } catch (error) {
-            setLoading(false);
-            setError(error.message);
-            window.alert(error.message)
-           }
-          };
+    // ... (previous code)
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+
+  try {
+      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, formData, {
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      });
+
+      const data = res.data;
+
+      if (data.success === false) {
+          setLoading(false);
+          setError(data.message);
+          return;
+      }
+
+      setUser(data.user);
+      const token = data.token;
+      localStorage.setItem('token', token);
+      localStorage.setItem("user-flavor", JSON.stringify(data));
+      setLoading(false);
+
+      navigate('/');
+      window.location.reload();
+
+  } catch (error) {
+      setLoading(false);
+      setError("An error occurred while logging in. Please try again.");
+      console.error("Error in loginUser:", error);
+
+   
+      if (error.response) {
+          setError(error.response.data.error);
+      } else {
+          setError("An unexpected error occurred.");
+      }
+  }
+};
+
+
+
        
    
            
