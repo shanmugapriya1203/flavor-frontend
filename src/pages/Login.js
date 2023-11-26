@@ -56,7 +56,7 @@ const handleSubmit = async (e) => {
       setLoading(false);
       setError("An error occurred while logging in. Please try again.");
       console.error("Error in loginUser:", error);
-
+     window.alert(error)
    
       if (error.response) {
           setError(error.response.data.error);
